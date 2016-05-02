@@ -3,9 +3,9 @@ import android.graphics.drawable.Drawable;
 
 public class AppData
 {
-	CharSequence packageName;
-	CharSequence appName;
-	Drawable drawable;
-	String permission;
+	public CharSequence packageName;
+	public String appName;
+	public Drawable icon;
+	public String permission;
 	
 }

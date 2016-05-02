@@ -5,8 +5,9 @@ import cn.virtualshadow.resc.Activity.BlankActivity;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.widget.Toast;
+import cn.virtualshadow.resc.Activity.ActivityToGetPackage;
 
-public class MainActivity extends BlankActivity
+public class MainActivity extends ActivityToGetPackage
 {
 
 	@Override
