@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:text="空间管理"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="200dp"
+		android:gravity="center"
+		android:layout_gravity="center"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<Button
+			android:layout_height="wrap_content"
+			android:text="清除应用列表缓存"
+			android:layout_width="match_parent"
+			android:id="@+id/cleardata"
+			style="@style/RescBinoButton"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<Button
+			android:layout_height="wrap_content"
+			android:text="清除本应用缓存"
+			android:layout_width="match_parent"
+			android:id="@+id/clearcache"
+			style="@style/RescBinoButton"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+
