@@ -6,9 +6,16 @@ import android.view.View.OnClickListener;
 import android.view.View;
 import android.widget.Toast;
 import cn.virtualshadow.resc.Activity.ActivityToGetPackage;
+import cn.virtualshadow.resc.view.Bino_App_Selector;
+import android.view.MotionEvent;
+import cn.virtualshadow.resc.view.Bino_Setting;
 
 public class MainActivity extends ActivityToGetPackage
 {
+
+	private Bino_App_Selector bas;
+
+	private Bino_Setting bs;
 
 	@Override
 	protected void start(Bundle savedInstanceState)
@@ -29,6 +36,13 @@ public class MainActivity extends ActivityToGetPackage
 					Toast.makeText(getApplicationContext(),"移除",Toast.LENGTH_LONG).show();
 				}
 			});
+		bs=(Bino_Setting)view.findViewById(R.id.mainBino_Setting);
+		bas=(Bino_App_Selector)view.findViewById(R.id.mainBino_App_Selector);
+		bas.bindActivity(this);
+		bs.lockSelector(bas);
+		
+		
 	}
-    
+	
+
 }

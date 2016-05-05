@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 
 public class DataStream
 {
@@ -23,7 +24,9 @@ public class DataStream
 		print(activity,"元素:"+apps.size());
 		return new DataStream(activity,apps);
 	}
-
+	public static DataStream push(Activity activity){
+		return new DataStream(activity);
+	}
 	
 
 	private static void print(Context c,String size)
@@ -35,14 +38,17 @@ public class DataStream
 		this.appList=apps;
 		this.parent=activity;
 	}
-	private void output(){
+	private DataStream(Activity activity){
+		this.parent=activity;
+	}
+	private void output(String dir){
 		try
 		{
 			for(AppData ad:appList){
-				FileOutputStream outputStream=parent.openFileOutput(ad.appName, parent.MODE_PRIVATE);
-				FileOutputStream iconOutput=parent.openFileOutput(ad.appName+"-icon",parent.MODE_PRIVATE);
+				FileOutputStream outputStream=parent.openFileOutput(dir+ad.appName, parent.MODE_PRIVATE);
+				FileOutputStream iconOutput=parent.openFileOutput(dir+ad.appName+"-icon",parent.MODE_PRIVATE);
 				
-				String allMessage=ad.appName+"\n"+ad.packageName+"\n"+ad.permission;
+				String allMessage=ad.appName+"\n"+ad.packageName;
 				byte[] buffer=allMessage.getBytes();
 				
 				try
@@ -66,7 +72,11 @@ public class DataStream
 		return baos.toByteArray();
 	}
 	
-	public void to(){
-		output();
+	public void to(String path){
+		output(path+"/");
+	}
+	public File getFileDir(String path){
+		File file=new File(parent.getFilesDir().getPath()+"/"+path);
+		return file;
 	}
 }

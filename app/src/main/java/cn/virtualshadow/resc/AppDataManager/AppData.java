@@ -3,7 +3,7 @@ import android.graphics.drawable.Drawable;
 
 public class AppData
 {
-	public CharSequence packageName;
+	public String packageName;
 	public String appName;
 	public Drawable icon;
 	public String permission;
