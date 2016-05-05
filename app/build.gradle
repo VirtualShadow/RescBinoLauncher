@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
-        versionName "β03"
+        versionName "β05"
     }
 
     buildTypes {
