@@ -1,56 +1,47 @@
 package cn.virtualshadow.resc.view;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
-import cn.virtualshadow.resc.MainActivity;
+import android.view.Gravity;
+import android.widget.PopupWindow;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import cn.virtualshadow.resc.Activity.ActivityToGetPackage;
-import android.util.EventLog;
-import android.widget.Scroller;
-import android.view.GestureDetector;
+import android.graphics.drawable.Drawable;
+import cn.virtualshadow.resc.R;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.Gallery.LayoutParams;
 
-public class Bino_Setting extends View
+public class Bino_Setting extends SeekBar implements OnSeekBarChangeListener
 {
 
+	
 	private Bino_App_Selector selector;
 
 	private int selectIndex;
 
 	private ActivityToGetPackage parent;
 
-	private int modTick=0;
+	private PopupWindow appNameTag;
 
-	private GestureDetector mGesture;
+	private TextView nameTag;
 
 	public Bino_Setting(Context mainActivity, AttributeSet attr)
 	{
 		super(mainActivity, attr);
 		this.parent = (ActivityToGetPackage) mainActivity;
 		
+		setMax(parent.appLength());
+		setOnSeekBarChangeListener(this);
 	}
 
-	@Override
-	protected void onDraw(Canvas canvas)
-	{
-		// TODO: Implement this method
-		super.onDraw(canvas);
-		canvas.drawColor(Color.argb(100, 200, 200, 200));
 
-	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
-		// TODO: Implement this method
-		if (event.getAction() == event.ACTION_UP)
-		{
-			selector.intoSelectApp();
-		}
-		return super.onTouchEvent(event);
-	}
+	
+
+
 
 	public void lockSelector(Bino_App_Selector bas)
 	{
@@ -58,40 +49,58 @@ public class Bino_Setting extends View
 	}
 
 
-	public void p_scroll()
+	public void scroll()
 	{
-		modTick++;
-		if (modTick == 7)
+		if (selectIndex <= parent.appLength())
 		{
-			selectIndex = selectIndex + 1;
-			if (selectIndex <= parent.appLength())
-			{
-				selector.selectApp(parent, selectIndex);	
-			}
-			else
-			{
-				selectIndex = 0;	
-			}
-			modTick = 0;
+			selector.selectApp(parent, selectIndex);	
 		}
+		}
+	@Override
+	public void onProgressChanged(SeekBar p1, int p2, boolean p3)
+	{
+		// TODO: Implement this method
+		if(p2!=0){
+			selectIndex=p2;
+			scroll();
+		}
+		if(appNameTag!=null){
+			nameTag.setText(selector.getSelectApp().appName);
+		}
+		else
+		{
+		appNameTag=new PopupWindow();
+		appNameTag.setWidth(LayoutParams.WRAP_CONTENT);
+		appNameTag.setHeight(LayoutParams.WRAP_CONTENT);
+		nameTag=new TextView(parent);
+		nameTag.setTextSize(26);
+		nameTag.setText(selector.getSelectApp().appName);
+		appNameTag.setContentView(nameTag);
+		appNameTag.showAsDropDown(this);
+		}
+		
+		
 	}
 
-	public void r_scroll()
+	@Override
+	public void onStartTrackingTouch(SeekBar p1)
 	{
-		modTick++;
-		if (modTick == 7)
-		{
-			selectIndex = selectIndex - 1;
-			if (selectIndex >= 0)
-			{
-				selector.selectApp(parent, selectIndex);	
-			}
-			else
-			{
-				selectIndex = parent.appLength();	
-			}
-			modTick = 0;
-		}
+		// TODO: Implement this method
+		
 	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar p1)
+	{
+		// TODO: Implement this method
+		selector.intoSelectApp();
+		appNameTag.dismiss();
+		appNameTag=null;
+	}
+
+
+
+
+	
 
 }

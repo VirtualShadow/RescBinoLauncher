@@ -63,8 +63,8 @@ public class Bino_App_Selector extends View
 		try
 		{
 
-			FileInputStream data=activity.openFileInput(new File(activity.getFilesDir().getName()+"/appdata dir").list()[(index * 2 - 2)]);
-			FileInputStream icon = activity.openFileInput(new File(activity.getFilesDir().getName()+"/appdata dir").list()[(index * 2 - 1)]);		
+			FileInputStream data=activity.openFileInput(new File(activity.getFilesDir().getPath()+"/appdata dir").listFiles()[(index * 2 - 2)].getPath());
+			FileInputStream icon = activity.openFileInput(new File(activity.getFilesDir().getPath()+"/appdata dir").listFiles()[(index * 2 - 1)].getPath());	
 			char[] buffer=new char[data.available()];
 			new InputStreamReader(data, "UTF-8").read(buffer);
 			StringBuffer message=new StringBuffer(new String(buffer));
@@ -100,4 +100,7 @@ public class Bino_App_Selector extends View
 		}
 	}
 
+	public AppData getSelectApp(){
+		return selectApp_now;
+	}
 }

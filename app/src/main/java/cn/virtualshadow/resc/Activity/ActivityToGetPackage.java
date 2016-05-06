@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileInputStream;
 
 public class ActivityToGetPackage extends BlankActivity
 {
@@ -102,6 +103,15 @@ public class ActivityToGetPackage extends BlankActivity
 		
 		return result;
 	}
+
+	@Override
+	public FileInputStream openFileInput(String name) throws FileNotFoundException
+	{
+		// TODO: Implement this method
+		return new FileInputStream(name);
 		
+	}
+		
+	
 		
 }
